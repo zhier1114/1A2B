@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numberGame</title>
+    <link rel="stylesheet" href="./_css/bootstrap.css">
+    <script src="./_js/bootstrap.bundle.js"></script>
+    <style>
+        #main {
+            height: 80vh;
+        }
+
+        #successPage {
+            background-color: rgb(36, 36, 36);
+            position: absolute;
+            height: 75vh;
+            width: 70%;
+            padding: 30px;
+        }
+
+        #failPage {
+            background-color: rgb(36, 36, 36);
+            position: absolute;
+            height: 75vh;
+            width: 70%;
+            padding: 30px;
+        }
+
+
+        #resultContainer {
+            height: 25px;
+            padding: 30px;
+        }
+
+        #digit {
+            height: 55%;
+        }
+
+        .input {
+            font-size: 108px;
+            width: 200px;
+            margin: 20px;
+            text-align: center;
+            appearance: none;
+            border-radius: 10px;
+        }
+
+        .input::-webkit-inner-spin-button,
+        .input::-webkit-outer-spin-button {
+            appearance: none;
+        }
+
+        #buttons {
+            height: 20%;
+        }
+
+        #submit,
+        #newGame {
+            width: 200px;
+        }
+
+        #record {
+            width: 25%;
+        }
+
+        #instruction {
+            height: 18vh;
+        }
+    </style>
+</head>
+
+<body style="height: 100vh; background-color: rgb(36, 36, 36); color: white;">
+    <div id="main" class=" w-100 d-flex p-4">
+        <div id="successPage" class="d-flex flex-column justify-content-center align-items-center d-none">
+            <span style=" font-size: 108px;" class=" w-100 d-flex justify-content-center ">恭喜答對！</span><br />
+            <span id="answerTitle2" style="font-size: 72px;" class=" w-100 d-flex justify-content-center ">正確答案：</span>
+            <div id="answer1" style="font-size: 72px;" class="answer w-100 d-flex justify-content-center "></div>
+            <button id="newGameButton2" class="newGameButton fs-2 m-5 p-2 rounded-4" style="width: 200px;">重玩一次</button>
+        </div>
+        <div id="failPage" class="d-flex flex-column justify-content-center align-items-center d-none">
+            <span style=" font-size: 108px;" class=" w-100 d-flex justify-content-center ">失敗了，你好菜</span><br />
+            <span id="answerTitle3" style="font-size: 72px;" class=" w-100 d-flex justify-content-center ">正確答案：</span>
+            <div id="answer2" style="font-size: 72px;" class="answer w-100 d-flex justify-content-center "></div>
+            <button id="newGameButton2" class="newGameButton fs-2 m-5 p-2 rounded-4" style="width: 200px;">重玩一次</button>
+        </div>
+        <div id="gameSection" class="w-75 h-100">
+            <div id="resultContainer" class="d-flex justify-content-evenly align-items-center fs-1"><span
+                    id="resultTitle">結果：</span>
+                <span id="result" class="w-50 ">&nbsp;</span>
+                <span id="countdown">剩餘10次</span>
+            </div>
+            <div id="digit" class="mb-0 d-flex justify-content-center align-items-center">
+                <form action="" class="h-100 w-100 d-flex justify-content-center align-items-center">
+                    <input type="number" maxlength="1" class="input" id="input1">
+                    <input type="number" maxlength="1" class="input" id="input2">
+                    <input type="number" maxlength="1" class="input" id="input3">
+                    <input type="number" maxlength="1" class="input" id="input4">
+                </form>
+            </div>
+            <div id="buttons" class=" d-flex justify-content-center align-items-center ">
+                <button id="newGameButton1" class="newGameButton fs-2 m-5 p-2 rounded-4"
+                    style="width: 200px;">重玩一次</button>
+                <button id="submit" class="fs-2 m-5 p-2 rounded-4">送出答案</button>
+            </div>
+        </div>
+        <div id="record" class="flex-column ps-2 border-start border-3">
+            <div id="recordTitle" class=" d-flex w-100  fs-3   justify-content-center align-items-center">
+                <span class="recordTitle d-flex justify-content-center w-50">你的答案</span>
+                <span class="recordTitle d-flex justify-content-center w-50">你的結果</span>
+            </div>
+            <div id="recordBody" class="d-flex">
+                <div id="answerRecord" class=" w-50 lh-lg d-flex fs-4 justify-content-center align-items-center">
+                    &nbsp;
+                </div>
+                <div id="resultRecord" class=" w-50 lh-lg d-flex fs-4 justify-content-center align-items-center">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="instruction" class="m-2 p-3 border rounded-3 d-flex">
+        <div class="d-flex w-50">
+            <h3 class="d-flex  justify-content-center align-items-center" style="height: 100%; width: 200px;">遊戲說明：</h3>
+            <div class=" h-100 d-flex flex-column lh-1 justify-content-center" style="font-size: 18px; width: 450px;">
+                <span>1. 猜四個不重複數字，數字範圍為0 ~ 9</span><br />
+                <span>2. 若答案包含你的一個數字且位置相同，則為1A</span><br />
+                <span>3. 若答案包含你的一個數字但不同位置，則為1B</span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <h3 class=" d-flex  justify-content-center align-items-center" style="height: 100%; width: 150px;">
+                範例：</h3>
+            <div class=" h-100 d-flex flex-column lh-1 justify-content-center" style="font-size: 18px; width: 650px;">
+                <span>假設本次答案為1024，你輸入的數字為1234</span><br />
+                <span>答案包含1、2、4三個數字，1、4位置相同得到2A，2的位置不同得到1B</span><br />
+                <span>最終得到結果：2 A 1 B</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+
+</html>
